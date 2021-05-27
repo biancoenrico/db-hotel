@@ -16,18 +16,32 @@ ON ospiti.id=prenotazioni_has_ospiti.ospite_id;
 
 3. Stampare Nome, Cognome, Prezzo e Pagante per tutte le prenotazioni fatte a Maggio 2018
 //
-SELECT `name`, `lastname`, `prenotazione_id`, `ospite_id`
+SELECT `name`, `lastname`, `prenotazione_id`, `ospite_id`,prenotazioni_has_ospiti.created_at
 FROM prenotazioni_has_ospiti
 INNER JOIN ospiti
-ON ospite_id = ospiti.id;
+ON prenotazioni_has_ospiti.ospite_id = ospiti.id
+WHERE prenotazioni_has_ospiti.created_at
+BETWEEN '2018-05-01' AND '2018-06-01'
 
 //
 
 4. Fai la somma di tutti i prezzi delle prenotazioni per le stanze del primo piano
 //
+SELECT *
+FROM pagamenti
+INNER JOIN prenotazioni
+ON pagamenti.prenotazione_id = prenotazioni.id
+INNER JOIN stanze
+ON prenotazioni.stanza_id = stanze.id
+WHERE floor = 1
 
 5. Prendi i dati di fatturazione per la prenotazione con id=7
 //
+SELECT *
+FROM pagamenti
+INNER JOIN prenotazioni
+ON pagamenti.prenotazione_id = prenotazioni.id
+WHERE pagamenti.prenotazione_id = 7
 
 6. Le stanze sono state tutte prenotate almeno una volta? (Visualizzare le stanze non ancora prenotate)
 //
