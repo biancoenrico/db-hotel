@@ -5,7 +5,7 @@ FROM prenotazioni_has_ospiti
 INNER JOIN ospiti
 ON ospiti.id=prenotazioni_has_ospiti.ospite_id
 GROUP BY `ospite_id`
-ORDER BY `prenotazioni` DESC
+HAVING `prenotazioni` > 2
 
 2. Stampare tutti gli ospiti per ogni prenotazione
 //
